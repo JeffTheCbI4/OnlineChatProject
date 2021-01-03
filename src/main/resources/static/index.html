@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat WebSocket</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/main.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/app.js"></script>
+</head>
+<body>
+<meta charset="UTF-8">
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+<div id="main-content" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <label for="chat-div">Чат</label>
+            <div id="chat-div" style="height: 400px; overflow: auto">
+                <table id="chat" class="table table-striped">
+                    <tbody id="chatBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="connect">WebSocket connection:</label>
+                    <button id="connect" class="btn btn-default" type="submit">Подключиться</button>
+                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Отключиться</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="form-inline">
+                <label for="name">Никнейм</label>
+                <input type="text" id="name" class="form-control" placeholder="Ваше имя">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="text-to-send">Текст</label>
+                    <textarea id="text-to-send" class="form-control" placeholder="Ваш текст" cols="155"></textarea>
+                </div>
+                <button id="send" class="btn btn-default" type="submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
