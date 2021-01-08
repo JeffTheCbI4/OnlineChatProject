@@ -14,12 +14,12 @@
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
     enabled. Please enable
     Javascript and reload this page!</h2></noscript>
-<div id="main-content" class="container">
-    <div class="row">
+<div id="main-content" class="container" style="background: lightskyblue">
+    <div class="row" style="background: lightblue">
         <div class="col-md-12">
             <label for="chat-div">Чат</label>
             <div id="chat-div" style="height: 400px; overflow: auto">
-                <table id="chat" class="table table-striped">
+                <table id="chat" class="table table-bordered" style="background: aliceblue">
                     <tbody id="chatBody">
                     </tbody>
                 </table>
@@ -32,7 +32,8 @@
                 <div class="form-group">
                     <label for="connect">WebSocket connection:</label>
                     <button id="connect" class="btn btn-default" type="submit">Подключиться</button>
-                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Отключиться</button>
+                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Отключиться
+                    </button>
                 </div>
             </form>
         </div>
@@ -45,12 +46,24 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <form class="form-inline">
+            <form class="form-inline" enctype="multipart/form-data" method="post">
                 <div class="form-group">
                     <label for="text-to-send">Текст</label>
                     <textarea id="text-to-send" class="form-control" placeholder="Ваш текст" cols="155"></textarea>
                 </div>
-                <button id="send" class="btn btn-default" type="submit">Отправить</button>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button id="send" class="btn btn-default" type="submit">Отправить</button>
+                        <button id="bold" class="btn btn-default" type="submit"><b>Ж</b></button>
+                        <button id="idiomatic" class="btn btn-default" type="submit"><i>I</i></button>
+                        <button id="strike" class="btn btn-default" type="submit"><s>S</s></button>
+                        <input type="file" id="image-selector" class="form-control" multiple
+                               accept="image/*,image/jpeg,image/png">
+                        <div>
+                            <img id="output">
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

@@ -16,6 +16,6 @@ public class MessageController {
         Thread.sleep(1000);
         return new Message("[" + messageDetails.getDate() + "] " +
                 HtmlUtils.htmlEscape(messageDetails.getUsername()) + ": " +
-                HtmlUtils.htmlEscape(messageDetails.getText()));
+                messageDetails.getText());
     }
 }
