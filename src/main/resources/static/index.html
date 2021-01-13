@@ -14,16 +14,21 @@
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
     enabled. Please enable
     Javascript and reload this page!</h2></noscript>
-<div id="main-content" class="container" style="background: lightskyblue">
+<div id="main-content" class="container">
     <div class="row" style="background: lightblue">
-        <div class="col-md-12">
-            <label for="chat-div">Чат</label>
-            <div id="chat-div" style="height: 400px; overflow: auto">
-                <table id="chat" class="table table-bordered" style="background: aliceblue">
-                    <tbody id="chatBody">
-                    </tbody>
-                </table>
-            </div>
+        <div style="text-align: center">
+            <h2>Чат</h2>
+        </div>
+        <div class="col-md-12" id="chat-div">
+            <table id="chat" class="table table-bordered" style="background: aliceblue">
+                <tbody id="chatBody">
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12" id="users-div">
+            <label for="user-list">Список пользователей</label>
+            <ol id="user-list">
+            </ol>
         </div>
     </div>
     <div class="row">

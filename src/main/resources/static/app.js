@@ -4,6 +4,11 @@ var stompClient = null;
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
     $("#disconnect").prop("disabled", !connected);
+    var usernameInput = document.getElementById("name");
+    if (usernameInput.value === '') {
+        usernameInput.value = "Гость";
+    }
+    $("#name").prop("disabled", connected);
     if (connected) {
         $("#chat").show();
     } else {
@@ -22,6 +27,10 @@ function connect() {
         stompClient.subscribe('/topic/messages', function (message) {
             showMessage(JSON.parse(message.body));
         });
+        const date = new Date().toLocaleTimeString();
+        stompClient.send("/app/users/connect", {}, JSON.stringify({'username': $("#name").val(),
+            'text': '', 'date': date
+        }));
     });
 }
 
@@ -36,25 +45,22 @@ function disconnect() {
 
 //Функция, отправляющая объект с данными сообщения в /app/message-details
 function sendMessage() {
-    const date = new Date().toLocaleTimeString();
-    const usernameInput = document.getElementById("name");
-    var username;
-    if (usernameInput.value !== '') {
-        username = usernameInput.value;
-    } else {
-        username = "Гость";
+    const text = document.getElementById("text-to-send");
+    if (text.value !== ''){
+        const date = new Date().toLocaleTimeString();
+        const usernameInput = document.getElementById("name");
+        const username = usernameInput.value;
+        stompClient.send("/app/message-details", {}, JSON.stringify({
+            'username': username,
+            'text': text.value, 'date': date
+        }));
+        text.value = '';
     }
-    stompClient.send("/app/message-details", {}, JSON.stringify({
-        'username': username,
-        'text': $("#text-to-send").val(), 'date': date
-    }));
-    $('#text-to-send').val('');
 }
 
 //Функция, вставляющая сообщение в тело чата и скроллящее в самый низ чата
 function showMessage(message) {
-    var txt = window.getSelection().toString();
-    $("#chatBody").append("<tr><td>" + message.content + txt + /*"<img src='" + $("#image-selector").src + "'>"*/"</td></tr>");
+    $("#chatBody").append("<tr><td>" + message.content + /*"<img src='" + $("#image-selector").src + "'>"*/"</td></tr>");
     $("#chat-div").scrollTop($("#chat-div")[0].scrollHeight);
 }
 
@@ -101,5 +107,12 @@ $(function () {
     });
     $("#strike").click(function () {
         addMark(3);
+    });
+
+    $("#text-to-send").keypress(function (e) {
+        if(e.which === 13 && !e.shiftKey) {
+            sendMessage()
+            e.preventDefault();
+        }
     });
 });

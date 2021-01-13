@@ -1,0 +1,16 @@
+#main-content {
+    background: lightskyblue;
+}
+
+#chat-div {
+    width: 900px;
+    height: 400px;
+    overflow: auto;
+}
+
+#users-div {
+    width: 250px;
+    height: 400px;
+    overflow: auto;
+    background: aliceblue;
+}
