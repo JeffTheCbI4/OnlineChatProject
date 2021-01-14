@@ -27,9 +27,7 @@ function connect() {
         stompClient.subscribe('/topic/messages', function (message) {
             showMessage(JSON.parse(message.body));
         });
-        const date = new Date().toLocaleTimeString();
-        stompClient.send("/app/users/connect", {}, JSON.stringify({'username': $("#name").val(),
-            'text': '', 'date': date
+        stompClient.send("/app/users/connect", {}, JSON.stringify({'username': $("#name").val(), 'text': ''
         }));
     });
 }
@@ -47,12 +45,10 @@ function disconnect() {
 function sendMessage() {
     const text = document.getElementById("text-to-send");
     if (text.value !== ''){
-        const date = new Date().toLocaleTimeString();
         const usernameInput = document.getElementById("name");
         const username = usernameInput.value;
         stompClient.send("/app/message-details", {}, JSON.stringify({
-            'username': username,
-            'text': text.value, 'date': date
+            'username': username, 'text': text.value
         }));
         text.value = '';
     }
@@ -60,7 +56,8 @@ function sendMessage() {
 
 //Функция, вставляющая сообщение в тело чата и скроллящее в самый низ чата
 function showMessage(message) {
-    $("#chatBody").append("<tr><td>" + message.content + /*"<img src='" + $("#image-selector").src + "'>"*/"</td></tr>");
+    const date = new Date().toLocaleTimeString();
+    $("#chatBody").append("<tr><td>" + "[" + date + "] " + message.content + /*"<img src='" + $("#image-selector").src + "'>"*/"</td></tr>");
     $("#chat-div").scrollTop($("#chat-div")[0].scrollHeight);
 }
 

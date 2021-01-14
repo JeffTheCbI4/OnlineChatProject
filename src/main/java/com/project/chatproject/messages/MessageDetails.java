@@ -14,6 +14,5 @@ import java.awt.*;
 public class MessageDetails {
     private String username;
     private String text;
-    private String date;
     //private Image image;
 }
