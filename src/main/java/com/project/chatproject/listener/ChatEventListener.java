@@ -1,5 +1,6 @@
 package com.project.chatproject.listener;
 
+import com.project.chatproject.controller.MessageController;
 import com.project.chatproject.messages.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,8 @@ public class ChatEventListener {
     private static final Logger logger = LoggerFactory.getLogger(ChatEventListener.class);
 
     @Autowired
+    private MessageController messageController;
+    @Autowired
     private SimpMessageSendingOperations messagingTemplate;
 
     @EventListener
@@ -29,7 +32,8 @@ public class ChatEventListener {
         String username = (String) headerAccessor.getSessionAttributes().get("username");
 
         logger.info("Пользователь отключился: " + username);
-        Message disconnectMessage = new Message("Пользователь " + username + " покинул чат");
+        Message disconnectMessage = new Message(username, Message.Type.DISCONNECT);
+        messageController.getUserList().remove(username);
         messagingTemplate.convertAndSend("/topic/messages", disconnectMessage);
     }
 }

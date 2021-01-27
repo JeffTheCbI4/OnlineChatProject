@@ -5,13 +5,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.awt.*;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 public class Message {
-    private String content;
-    //private Image image;
+    private String username;
+    private String text;
+    private Type type;
+    private String image;
+
+    public enum Type {
+        CHAT,
+        CONNECT,
+        DISCONNECT,
+    }
+
+    public Message(String username, Type type){
+        this.username = username;
+        this.type = type;
+    }
+
+    public Message(String username, String text, Type type){
+        this.username = username;
+        this.text = text;
+        this.type = type;
+    }
 }
